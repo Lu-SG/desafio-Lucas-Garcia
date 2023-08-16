@@ -9,14 +9,41 @@ class CaixaDaLanchonete {
 
     calcularValorDaCompra(metodoDePagamento, itens) {
         var valortotal = 0;
-        acompanhamento_chantily = false;
+        var cafe = false;
+        var sanduiche = false;
+        var flag_acompanhamento = false;
         
+        //acompanhamento cafe
         for (let i = 0; i < itens.length; i++) {
             const [Nome, Quantidade] = itens[i].split(',');
-            if(Nome == this.código[0] || acompanhamento_chantily == false){
-                return "'Item extra não pode ser pedido sem o principal'";
+            if(Nome == this.código[0]){
+                cafe = true;
+                break
             }       
         }
+        //acompanhamento queijo
+        for (let i = 0; i < itens.length; i++) {
+            const [Nome, Quantidade] = itens[i].split(',');
+            if(Nome == this.código[3]){
+                sanduiche = true;
+                break
+            }       
+        }
+          
+        //verificação flag acompanhamento
+        for (let i = 0; i < itens.length; i++) {
+            const [Nome, Quantidade] = itens[i].split(',');
+            if ((Nome == this.código[1] && cafe == false) || (Nome == this.código[5] && queijo == false)){
+                flag_acompanhamento = true;
+                break
+            }   
+        }
+        //return da flag acompanhamento
+        if (flag_acompanhamento == true){
+            return console.log('Item extra não pode ser pedido sem o principal')
+        }
+
+        
 
         //cálculo do valor total percorrendo a lista de itens
         for (let i = 0; i < itens.length; i++) {
