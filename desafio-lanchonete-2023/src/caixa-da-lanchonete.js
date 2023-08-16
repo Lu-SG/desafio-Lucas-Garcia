@@ -12,7 +12,22 @@ class CaixaDaLanchonete {
         var cafe = false;
         var sanduiche = false;
         var flag_acompanhamento = false;
+        var flag_pedido_nulo = false;
+        var flagPedidoFora = false;
+
+        //verificar flag item nulo
+        if(itens == null){
+            flag_pedido_nulo = true;    
+        }  
+        //verificação flag acompanhamento
+        if(flag_pedido_nulo == true){
+            return 'Não há itens no carrinho de compra!'
+        }
         
+        //return da flag acompanhamento
+        if (flag_acompanhamento == true){
+            return 'Item extra não pode ser pedido sem o principal'
+        }
         //acompanhamento cafe
         for (let i = 0; i < itens.length; i++) {
             const [Nome, Quantidade] = itens[i].split(',');
@@ -21,6 +36,19 @@ class CaixaDaLanchonete {
                 break
             }       
         }
+        for (let i = 0; i < itens.length; i++) {
+            const [Nome, Quantidade] = itens[i].split(',');
+            if(itens.includes(Nome)){
+                
+            }else{
+                flagPedidoFora = true;
+            }       
+        }
+        
+        if (flagPedidoFora == true){
+            return 'Não há itens no carrinho de compra!';
+        }
+
         //acompanhamento queijo
         for (let i = 0; i < itens.length; i++) {
             const [Nome, Quantidade] = itens[i].split(',');
@@ -40,10 +68,8 @@ class CaixaDaLanchonete {
         }
         //return da flag acompanhamento
         if (flag_acompanhamento == true){
-            return console.log('Item extra não pode ser pedido sem o principal')
+            return console.log("Item extra não pode ser pedido sem o principal")
         }
-
-        
 
         //cálculo do valor total percorrendo a lista de itens
         for (let i = 0; i < itens.length; i++) {
@@ -66,7 +92,8 @@ class CaixaDaLanchonete {
                 valortotal = valortotal + (valortotal/100 * 3);
               break;
             default:
-        }    
+        } return `R$ ${valortotal}`
+            
     } 
     
 } 
